@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { compose } from 'recompose';
 import * as R from 'ramda';
 import { Avatar, Table, Button, Dropdown, Icon, Menu, withModal } from '@8base/boost';
@@ -10,6 +10,16 @@ import gql from 'graphql-tag';
 import { PropertyCreateDialog } from './PropertyCreateDialog';
 import { PropertyEditDialog } from './PropertyEditDialog';
 import { PropertyDeleteDialog } from './PropertyDeleteDialog';
+
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+`;
+
+// const Wrap= styled.div`
+
+// `;
 
 const AVATARS_LIST_QUERY = gql`
   query AvatarList {
@@ -32,17 +42,10 @@ const AVATARS_LIST_QUERY = gql`
 `;
 
 let AvatarList = ({ avatars, openModal, closeModal }) => (
-  <Table.Plate>
-    <Table.Header columns="repeat(10, 1fr) 60px">
-      <Table.HeaderCell>Pictures</Table.HeaderCell>
-      <Table.HeaderCell>Name</Table.HeaderCell>
-      <Table.HeaderCell />
-    </Table.Header>
-
+  <Fragment>
     <Table.Body loading={avatars.loading} data={R.pathOr([], ['avatarsList', 'items'], avatars)}>
       {avatar => (
-        <Table.BodyRow columns="repeat(10, 1fr) 60px" key={avatar.id}>
-          {/* <Table.BodyCell> */}
+        <div key={avatar.id}>
           {avatar.pictures.items.length > 0 && (
             <Avatar
               src={avatar.pictures.items[0].downloadUrl}
@@ -53,14 +56,10 @@ let AvatarList = ({ avatars, openModal, closeModal }) => (
               pickLabel="Change"
             />
           )}
-          {/* {avatar.pictures.items.length > 0 && (
-              <img src={avatar.pictures.items[0].downloadUrl} alt="" style={{ width: '5rem', height: '5rem' }} />
-            )} */}
 
-          {/* </Table.BodyCell> */}
-          <Table.BodyCell>{avatar.name}</Table.BodyCell>
+          <div>{avatar.name}</div>
 
-          <Table.BodyCell>
+          <div>
             <Dropdown.Plate defaultOpen={false}>
               <Dropdown.Head>
                 <Icon name="Dots" color="LIGHT_GRAY2" />
@@ -80,14 +79,14 @@ let AvatarList = ({ avatars, openModal, closeModal }) => (
                 )}
               </Dropdown.Body>
             </Dropdown.Plate>
-          </Table.BodyCell>
-        </Table.BodyRow>
+          </div>
+        </div>
       )}
     </Table.Body>
-    <Table.Footer justifyContent="center">
+    <div>
       <Button onClick={() => openModal(PropertyCreateDialog.id)}>Create Property</Button>
-    </Table.Footer>
-  </Table.Plate>
+    </div>
+  </Fragment>
 );
 
 AvatarList = compose(

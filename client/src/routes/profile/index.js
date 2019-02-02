@@ -6,6 +6,8 @@ import { PropertyEditDialog } from './PropertyEditDialog';
 
 import { PropertyDeleteDialog } from './PropertyDeleteDialog';
 import { AvatarList } from './AvatarList';
+import GeoLocate from './GeoLocate';
+import UserLocation from './UserLocation';
 
 const Profile = () => (
   <Card.Plate padding="md" stretch>
@@ -19,6 +21,8 @@ const Profile = () => (
 
     <Card.Body padding="none" stretch>
       <AvatarList />
+      <GeoLocate />
+      <UserLocation />
     </Card.Body>
   </Card.Plate>
 );
