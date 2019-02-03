@@ -16,7 +16,6 @@ const Container = styled.div`
 
   background-color: #fff;
   border: 1px solid #e6e9ef;
-  padding: 24px;
   border-radius: 10px;
 
   &:hover {
@@ -24,7 +23,7 @@ const Container = styled.div`
   }
 `;
 
-const WrapperStatusHead = styled.div`
+const StatusContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,25 +40,61 @@ const WrapperStatusHead = styled.div`
     color: #222d39;
     font-weight: 500;
     line-height: 1.3;
+    padding: 24px;
   }
+`;
+const StatusBanner = styled.div`
+  background-color: #f9fafb;
+
   h2 {
     font-size: 17px;
-    color: #222d39;
+    color: #8492a6;
     line-height: 1.6;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    padding: 15px 24px 13px 24px;
+    /* background: #f1f3f5; */
+  }
+  h3 {
+    line-height: 1.3;
+    padding: 13px 24px 15px 24px;
+    text-transform: capitalize;
+    /* background: #e5e7e8; */
+    background: #e6f5ff;
+    font-weight: 600;
+    color: #3c4858;
   }
 `;
 
 const Form = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 24px;
 
   label {
     font-size: 17px;
-    color: #1fb6ff;
+    color: #222d39;
+
     line-height: 1.3;
     font-size: 500;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  input {
+    margin-left: 21px;
+  }
+
+  span {
+    background: repeating-linear-gradient(135deg, #212529, #212529 5px, rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0) 10px);
+    opacity: 0.0125;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 `;
 
@@ -133,13 +168,16 @@ class Status extends Component {
 
                   return (
                     <Container>
-                      <WrapperStatusHead>
+                      <StatusContainer>
                         <h1>Status</h1>
-                        <h2>I am looking too...</h2>
-                        {data.user.mood}
-                      </WrapperStatusHead>
+                        <StatusBanner>
+                          <h2>I am looking too...</h2>
+                          <h3>{data.user.mood}</h3>
+                        </StatusBanner>
+                      </StatusContainer>
 
                       <Form>
+                        <span />
                         <Grid.Layout gap="sm">
                           <Grid.Box>
                             <label>
@@ -176,7 +214,7 @@ class Status extends Component {
                           </Grid.Box>
                           <Grid.Box>
                             <label>
-                              Join a group excursion:
+                              Join an excursion:
                               <input
                                 type="radio"
                                 value="excursion"

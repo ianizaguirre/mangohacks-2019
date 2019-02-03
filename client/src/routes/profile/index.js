@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Heading } from '@8base/boost';
-
+import bottle from '../../images/bottle-message-2.png';
 import { PropertyCreateDialog } from './PropertyCreateDialog';
 import { PropertyEditDialog } from './PropertyEditDialog';
 
@@ -37,6 +37,13 @@ const GridContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+const BottleImg = styled.img.attrs({
+  src: bottle,
+})`
+  width: 17%;
+`;
+
 const Profile = () => (
   <Card.Plate padding="md" stretch>
     <Card.Header>
@@ -64,6 +71,7 @@ const Profile = () => (
         </StatusMatchWrapper>
       </GridContainer>
     </Container>
+    <BottleImg />
   </Card.Plate>
 );
 
