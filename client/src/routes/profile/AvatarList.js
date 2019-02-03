@@ -9,12 +9,14 @@ import gql from 'graphql-tag';
 
 import { PropertyCreateDialog } from './PropertyCreateDialog';
 import { PropertyEditDialog } from './PropertyEditDialog';
-import { PropertyDeleteDialog } from './PropertyDeleteDialog';
 
 import styled from 'styled-components';
 
 const Container = styled.div`
-  display: flex;
+  /* display: flex; */
+  div:first-child {
+    overflow-y: hidden;
+  }
 `;
 const Wrap = styled.div`
   display: flex;
@@ -27,10 +29,11 @@ const Wrap = styled.div`
   }
 `;
 const ContainAvatar = styled.div`
-  div svg {
+  /* div svg {
     width: 1.8rem;
     height: 1.8rem;
-  }
+  } */
+  /* background: green; */
 `;
 const Title = styled.h3`
   font-size: 19px;
@@ -82,27 +85,6 @@ let AvatarList = ({ avatars, openModal, closeModal }) => (
 
             <Title>{avatar.name}</Title>
           </Wrap>
-          <div>
-            <Dropdown.Plate defaultOpen={false}>
-              <Dropdown.Head>
-                <Icon name="Dots" color="LIGHT_GRAY2" />
-              </Dropdown.Head>
-              <Dropdown.Body pin="right">
-                {({ closeDropdown }) => (
-                  <Menu.Plate>
-                    <Menu.Item
-                      onClick={() => {
-                        openModal(PropertyDeleteDialog.id, { id: avatar.id });
-                        closeDropdown();
-                      }}
-                    >
-                      Delete
-                    </Menu.Item>
-                  </Menu.Plate>
-                )}
-              </Dropdown.Body>
-            </Dropdown.Plate>
-          </div>
         </ContainAvatar>
       )}
     </Table.Body>
