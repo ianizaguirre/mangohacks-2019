@@ -24,6 +24,8 @@ class PropertyCreateDialog extends React.Component {
     await this.props.avatarCreate({ variables: { data } });
 
     this.context.closeModal(PROPERTY_CREATE_DIALOG_ID);
+
+    localStorage.setItem('Set-Profile', 'true');
   };
 
   onClose = () => {
@@ -47,7 +49,7 @@ class PropertyCreateDialog extends React.Component {
         <Button color="neutral" variant="outlined" disabled={submitting} onClick={this.onClose}>
           Cancel
         </Button>
-        <Button color="red" type="submit" text="Create Property" loading={submitting} />
+        <Button color="red" type="submit" text="Save Changes" loading={submitting} />
       </Dialog.Footer>
     </form>
   );

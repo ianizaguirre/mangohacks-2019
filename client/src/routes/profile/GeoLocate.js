@@ -6,8 +6,9 @@ import UserLocation from './UserLocation';
 const Table = styled.table`
   padding: 20px;
   box-shadow: 0 1px 1px 0 rgba(34, 45, 57, 0.05);
-  border: 1px solid #d5dce3;
+  border-top: 1px solid #d5dce3;
   border-radius: 10px;
+  margin-top: 20px;
 `;
 
 const TD = styled.td`

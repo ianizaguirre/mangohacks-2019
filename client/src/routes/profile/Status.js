@@ -14,10 +14,14 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  background-color: #f9fafb;
+  background-color: #fff;
+  border: 1px solid #e6e9ef;
   padding: 24px;
-  box-shadow: 0 1px 3px 0 rgba(50, 50, 93, 0.14), 0 4px 6px 0 rgba(112, 157, 199, 0.08);
   border-radius: 10px;
+
+  &:hover {
+    box-shadow: 0 2px 50px 0 rgba(12, 16, 20, 0.1);
+  }
 `;
 
 const WrapperStatusHead = styled.div`
@@ -82,6 +86,16 @@ class Status extends Component {
     mood: '',
   };
 
+  componentDidMount() {
+    // reinstate our localStorage
+    let localStorageRef = localStorage.getItem('Current-Mood-Set');
+    if (localStorageRef) {
+      this.setState({
+        mood: localStorageRef,
+      });
+    }
+  }
+
   handleUpdateItem = async (updateItemMutation, id) => {
     // call the mutation
     console.log(' ✅ Updating User Status');
@@ -98,8 +112,10 @@ class Status extends Component {
   };
 
   handleOnValueChange = event => {
+    let userMood = event.target.value;
+    localStorage.setItem('Current-Mood-Set', userMood);
     this.setState({
-      mood: event.target.value,
+      mood: userMood,
     });
   };
 
@@ -118,8 +134,9 @@ class Status extends Component {
                   return (
                     <Container>
                       <WrapperStatusHead>
-                        <h1>My Status</h1>
+                        <h1>Status</h1>
                         <h2>I am looking too...</h2>
+                        {data.user.mood}
                       </WrapperStatusHead>
 
                       <Form>
