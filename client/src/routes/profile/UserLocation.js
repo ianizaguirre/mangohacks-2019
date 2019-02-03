@@ -25,29 +25,6 @@ const UPDATE_LOCATION_MUTATION = gql`
   }
 `;
 
-// export const UPDATE_LOCATION_MUTATION = gql`
-//   mutation UserUpdate($data: UserUpdateInput!) {
-//     userUpdate(data: $data) {
-//       id
-//       lat
-//       long
-//     } filter: {id: }
-//   }
-// `;
-
-//
-//  mutation {
-//    userUpdate(data: {
-
-//          lat: 1.322222
-//        long: 23.26622
-
-//  } filter: {id: "cjrmv3lie006901quv1cgkjt1"}) {
-//    id
-
-//    }
-//  }
-
 class UserLocation extends Component {
   state = {
     lat: 0,
@@ -57,6 +34,10 @@ class UserLocation extends Component {
   userReceived = user => {
     // console.log('userId = ', user.id);
     localStorage.setItem('Logged-In-As', user.id);
+    //
+    localStorage.setItem('Current-User-Lat', this.state.lat);
+    localStorage.setItem('Current-User-Long', this.state.long);
+
     // console.log(user);
   };
 

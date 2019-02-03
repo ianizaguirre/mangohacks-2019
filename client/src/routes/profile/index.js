@@ -41,7 +41,7 @@ const GridContainer = styled.div`
 const BottleImg = styled.img.attrs({
   src: bottle,
 })`
-  width: 17%;
+  width: 16%;
 `;
 
 const Profile = () => (
