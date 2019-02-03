@@ -77,6 +77,22 @@ const Container = styled.div`
     margin-bottom: 20px;
   }
 `;
+// -------------
+const FeetText = styled.span`
+  color: #0f9f4f;
+  font-weight: 500;
+`;
+const IdText = styled.span`
+  color: #ff7849;
+  font-weight: 500;
+`;
+const MiniContainer = styled.div`
+  p {
+    font-size: 17px;
+    color: #222d39;
+    line-height: 1.3;
+  }
+`;
 
 class StatusMatch extends Component {
   handleDistance = item => {
@@ -150,12 +166,16 @@ class StatusMatch extends Component {
       //
       if (mood1 == mood && feet < 30) {
         return (
-          <div>
-            <p>One user is {feet} feet away</p>
+          <MiniContainer>
+            <p>
+              One user is <FeetText>{feet}</FeetText> feet away
+            </p>
             <br />
-            <p>Their id is {id}</p>
+            <p>
+              Their id is <IdText>{id}</IdText>
+            </p>
             <br />
-          </div>
+          </MiniContainer>
         );
       } // END IF
     } // END IF

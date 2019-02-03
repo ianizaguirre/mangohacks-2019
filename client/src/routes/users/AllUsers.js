@@ -35,6 +35,15 @@ const Container = styled.div`
     line-height: 1.3;
     margin-bottom: 20px;
   }
+  p {
+    font-size: 17px;
+    color: #222d39;
+    line-height: 1.3;
+  }
+  span {
+    color: #ff7849;
+    font-weight: 500;
+  }
 `;
 
 class AllUsers extends Component {
@@ -50,7 +59,9 @@ class AllUsers extends Component {
               <Fragment>
                 <h2>All Users</h2>
                 {data.usersList.items.map(item => (
-                  <p>{item.id}</p>
+                  <p>
+                    ID: <span>{item.id}</span>
+                  </p>
                 ))}
               </Fragment>
             );
