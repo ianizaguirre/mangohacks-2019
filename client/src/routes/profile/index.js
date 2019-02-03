@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Card, Heading } from '@8base/boost';
 
 import { PropertyCreateDialog } from './PropertyCreateDialog';
@@ -10,6 +11,20 @@ import GeoLocate from './GeoLocate';
 // import UserLocation from './UserLocation';
 import Status from './Status';
 
+// const Container = styled.div`
+//   width: 90%;
+//   margin: 0 auto;
+// `;
+const StatusWrapper = styled.div`
+  background-color: #fff;
+  padding: 24px;
+`;
+const GeoLocateWrapper = styled.div`
+  background-color: #fff;
+`;
+const AvatarWrapper = styled.div`
+  background-color: #fff;
+`;
 const Profile = () => (
   <Card.Plate padding="md" stretch>
     <Card.Header>
@@ -21,9 +36,15 @@ const Profile = () => (
     <PropertyDeleteDialog />
 
     <Card.Body padding="none" stretch>
-      <AvatarList />
-      <GeoLocate />
-      <Status />
+      <AvatarWrapper>
+        <AvatarList />
+      </AvatarWrapper>
+      <GeoLocateWrapper>
+        <GeoLocate />
+      </GeoLocateWrapper>
+      <StatusWrapper>
+        <Status />
+      </StatusWrapper>
     </Card.Body>
   </Card.Plate>
 );

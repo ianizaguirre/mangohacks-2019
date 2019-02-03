@@ -15,7 +15,7 @@ const CURRENT_USER_QUERY = gql`
   }
 `;
 
-export const UPDATE_LOCATION_MUTATION = gql`
+const UPDATE_LOCATION_MUTATION = gql`
   mutation UserUpdate($data: UserUpdateInput!) {
     userUpdate(data: $data) {
       id
@@ -55,9 +55,9 @@ class UserLocation extends Component {
   };
 
   userReceived = user => {
-    console.log('userId = ', user.id);
+    // console.log('userId = ', user.id);
     localStorage.setItem('Logged-In-As', user.id);
-    console.log(user);
+    // console.log(user);
   };
 
   componentDidUpdate() {
@@ -72,7 +72,7 @@ class UserLocation extends Component {
       );
     }
   }
-  // await this.props.propertyUpdate({ variables: { data: { ...data, id } }});
+
   handleUpdateItem = async (updateItemMutation, id) => {
     // call the mutation
     console.log(' ✅ Updating UserLocation - lat & long');
@@ -103,14 +103,28 @@ class UserLocation extends Component {
 
                   this.handleUpdateItem(userUpdate, data.user.id);
 
-                  return (
-                    <div>
-                      <div>{data.user.id}</div>
-                      <p>...............</p>
-                      <p>{this.props.lat}</p>
-                      <p>{this.props.long}</p>
-                    </div>
-                  );
+                  return <> </>;
+                  {
+                    /* return { */
+                  }
+                  {
+                    /* <div> */
+                  }
+                  {
+                    /* <div>{data.user.id}</div> */
+                  }
+                  {
+                    /* <p>{this.props.lat}</p> */
+                  }
+                  {
+                    /* <p>{this.props.long}</p> */
+                  }
+                  {
+                    /* </div> */
+                  }
+                  {
+                    /* }; */
+                  }
                 }}
               </Mutation>
             );

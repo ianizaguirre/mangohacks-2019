@@ -16,7 +16,28 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
 `;
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  div:first-child {
+    width: 14rem;
+    height: 14rem;
+  }
+`;
+const ContainAvatar = styled.div`
+  div svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+`;
+const Title = styled.h3`
+  font-size: 19px;
+  line-height: 1.3;
+  color: #222d39;
+  font-weight: 500;
+`;
 // const Wrap= styled.div`
 
 // `;
@@ -42,23 +63,25 @@ const AVATARS_LIST_QUERY = gql`
 `;
 
 let AvatarList = ({ avatars, openModal, closeModal }) => (
-  <Fragment>
+  <Container>
     <Table.Body loading={avatars.loading} data={R.pathOr([], ['avatarsList', 'items'], avatars)}>
       {avatar => (
-        <div key={avatar.id}>
-          {avatar.pictures.items.length > 0 && (
-            <Avatar
-              src={avatar.pictures.items[0].downloadUrl}
-              alt=""
-              onPick={() => {
-                openModal(PropertyEditDialog.id, { initialValues: avatar });
-              }}
-              pickLabel="Change"
-            />
-          )}
+        <ContainAvatar key={avatar.id}>
+          <Wrap>
+            {avatar.pictures.items.length > 0 && (
+              <Avatar
+                src={avatar.pictures.items[0].downloadUrl}
+                alt=""
+                onPick={() => {
+                  openModal(PropertyEditDialog.id, { initialValues: avatar });
+                }}
+                pickLabel="Change"
+                size="xl"
+              />
+            )}
 
-          <div>{avatar.name}</div>
-
+            <Title>{avatar.name}</Title>
+          </Wrap>
           <div>
             <Dropdown.Plate defaultOpen={false}>
               <Dropdown.Head>
@@ -80,13 +103,13 @@ let AvatarList = ({ avatars, openModal, closeModal }) => (
               </Dropdown.Body>
             </Dropdown.Plate>
           </div>
-        </div>
+        </ContainAvatar>
       )}
     </Table.Body>
     <div>
       <Button onClick={() => openModal(PropertyCreateDialog.id)}>Create Property</Button>
     </div>
-  </Fragment>
+  </Container>
 );
 
 AvatarList = compose(

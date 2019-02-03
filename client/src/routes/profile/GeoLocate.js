@@ -1,6 +1,20 @@
 import React, { Component, Fragment } from 'react';
+import styled from 'styled-components';
 import { geolocated } from 'react-geolocated';
 import UserLocation from './UserLocation';
+
+const Table = styled.table`
+  padding: 20px;
+  box-shadow: 0 1px 1px 0 rgba(34, 45, 57, 0.05);
+  border: 1px solid #d5dce3;
+  border-radius: 10px;
+`;
+
+const TD = styled.td`
+  padding: 5px;
+  color: ${props => (props.heading ? '#222d39' : '#3e4854')};
+  font-size: ${props => (props.heading ? '19px' : '13px')};
+`;
 
 class GeoLocate extends Component {
   state = {
@@ -27,18 +41,18 @@ class GeoLocate extends Component {
       <div>Geolocation is not enabled</div>
     ) : this.props.coords ? (
       <Fragment>
-        <table>
+        <Table>
           <tbody>
             <tr>
-              <td>latitude</td>
-              <td>{this.props.coords.latitude}</td>
+              <TD heading>latitude</TD>
+              <TD>{this.props.coords.latitude}</TD>
             </tr>
             <tr>
-              <td>longitude</td>
-              <td>{this.props.coords.longitude}</td>
+              <TD heading>longitude</TD>
+              <TD>{this.props.coords.longitude}</TD>
             </tr>
           </tbody>
-        </table>
+        </Table>
         <UserLocation lat={this.props.coords.latitude} long={this.props.coords.longitude} />
       </Fragment>
     ) : (
