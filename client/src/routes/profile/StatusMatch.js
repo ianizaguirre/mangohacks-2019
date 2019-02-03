@@ -79,50 +79,86 @@ const Container = styled.div`
 `;
 
 class StatusMatch extends Component {
-  handleDistance = (lat2, lon2, id, mood) => {
-    let lat1 = JSON.parse(localStorage.getItem('Current-User-Lat'));
-    let lon1 = JSON.parse(localStorage.getItem('Current-User-Long'));
-    // mood1 is already stored as a string so no need to parse it
-    let mood1 = localStorage.getItem('Current-Mood-Set');
-    //
-    console.log(`LAT1-------->`, lat1);
-    console.log(`LON1-------->`, lon1);
-    console.log(`Mood1-------->`, mood1);
-    //
-    console.log(`Mood2-------->`, mood);
+  handleDistance = item => {
+    console.log('TESSSSSSSSSSSSSSS');
+    console.log('item Length ===>', item.length);
+    console.log(item);
 
-    var radlat1 = (Math.PI * lat1) / 180;
-    var radlat2 = (Math.PI * lat2) / 180;
-    var radlon1 = (Math.PI * lon1) / 180;
-    var radlon2 = (Math.PI * lon2) / 180;
-    var theta = lon1 - lon2;
-    var radtheta = (Math.PI * theta) / 180;
-    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-    dist = Math.acos(dist);
-    dist = (dist * 180) / Math.PI;
-    dist = dist * 60 * 1.1515;
-    // if (unit=="K") { dist = dist * 1.609344 }
-    // if (unit=="N") { dist = dist * 0.8684 }
+    if (item.length > 0) {
+      console.log('🔥🔥🔥🔥🔥🔥🔥');
+      item = item[0];
+      //
+      //
+      let lat2 = item.lat;
+      let lon2 = item.long;
+      let id = item.id;
+      let mood = item.mood;
+      //
+      let lat1 = JSON.parse(localStorage.getItem('Current-User-Lat'));
+      let lon1 = JSON.parse(localStorage.getItem('Current-User-Long'));
+      // mood1 is already stored as a string so no need to parse it
+      let mood1 = localStorage.getItem('Current-Mood-Set');
+      //
+      console.log(`LAT1--CurrentUser------>`, lat1);
+      console.log(`LON1--CurrentUser------>`, lon1);
+      console.log(`Mood1---CurrentUser----->`, mood1);
+      //
+      console.log(`LAT2--OtherUser------>`, lat2);
+      console.log(`LON2--OtherUser------>`, lon2);
+      console.log(`Mood2----OTHER-User---->`, mood);
 
-    let feet = dist * 5280;
-    // return dist // miles
-    console.log(`FEET========>`, feet);
+      // -------Round to at max 2 decimal places -------
+      lat1 = Math.round(lat1 * 100) / 100;
+      lon1 = Math.round(lon1 * 100) / 100;
+      lat2 = Math.round(lat2 * 100) / 100;
+      lon2 = Math.round(lon2 * 100) / 100;
+      // -----------------------------------------------
 
-    // Round Feet to 2 decimal places
-    feet = Math.floor(feet * 100) / 100;
-    console.log('FEET ROUNDED------>', feet);
+      console.log(`LAT1--CurrentUser------>`, lat1);
+      console.log(`LON1--CurrentUser------>`, lon1);
+      console.log(`Mood1---CurrentUser----->`, mood1);
+      //
+      console.log(`LAT2--OtherUser------>`, lat2);
+      console.log(`LON2--OtherUser------>`, lon2);
+      console.log(`Mood2----OTHER-User---->`, mood);
+      //
 
-    //
-    if (mood1 == mood && feet < 30) {
-      return (
-        <div>
-          <p>One user is {feet} feet away</p>
-          <br />
-          <p>Their id is {id}</p>
-          <br />
-        </div>
-      );
-    }
+      var radlat1 = (Math.PI * lat1) / 180;
+      var radlat2 = (Math.PI * lat2) / 180;
+      var radlon1 = (Math.PI * lon1) / 180;
+      var radlon2 = (Math.PI * lon2) / 180;
+      var theta = lon1 - lon2;
+      var radtheta = (Math.PI * theta) / 180;
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      dist = Math.acos(dist);
+      dist = (dist * 180) / Math.PI;
+      dist = dist * 60 * 1.1515;
+      console.log(`dist ========>`, dist);
+      let feet = dist * 5280;
+      // return dist // miles
+      console.log(`FEET========>`, feet);
+
+      // Round Feet to 2 decimal places
+      // feet = Math.floor(feet * 100) / 100;
+      feet = Math.round(feet * 100) / 100;
+      console.log('FEET ROUNDED------>', feet);
+
+      console.log('mood1 == mood ', mood1 == mood);
+      console.log('feet < 30 ', feet < 30);
+
+      // TODO : fix feet check issue -- (mood1 == mood && feet < 30)
+      //
+      if (mood1 == mood && feet < 30) {
+        return (
+          <div>
+            <p>One user is {feet} feet away</p>
+            <br />
+            <p>Their id is {id}</p>
+            <br />
+          </div>
+        );
+      } // END IF
+    } // END IF
   };
 
   handleFilter = item => {
@@ -137,10 +173,10 @@ class StatusMatch extends Component {
 
     console.log('Final Array======');
     console.log(otherArray);
+
     // return otherArray;
 
-    //
-    // this.handleDistance(item.lat, item.long, item.id, item.mood);
+    return this.handleDistance(otherArray);
   };
 
   render() {
@@ -163,11 +199,11 @@ class StatusMatch extends Component {
                     <Fragment>
                       <h2>Matches</h2>
                       {data.usersList.items.map(item => (
-                        <div>
-                          {this.handleFilter(item)}
-                          {this.handleDistance(item.lat, item.long, item.id, item.mood)}
+                        <div key={item.id}>
+                          {/* {this.handleFilter(item)}
+                          {this.handleDistance(item.lat, item.long, item.id, item.mood)} */}
 
-                          {/* {this.handleDistance(item)} */}
+                          {this.handleFilter(item)}
                         </div>
                       ))}
                     </Fragment>
