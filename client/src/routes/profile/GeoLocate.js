@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { geolocated } from 'react-geolocated';
+import UserLocation from './UserLocation';
 
 class GeoLocate extends Component {
   state = {
@@ -16,6 +17,7 @@ class GeoLocate extends Component {
 
   // componentDidUpdate() {
   //   console.log('It Updated');
+
   // }
 
   render() {
@@ -24,20 +26,25 @@ class GeoLocate extends Component {
     ) : !this.props.isGeolocationEnabled ? (
       <div>Geolocation is not enabled</div>
     ) : this.props.coords ? (
-      <table>
-        <tbody>
-          <tr>
-            <td>latitude</td>
-            <td>{this.props.coords.latitude}</td>
-          </tr>
-          <tr>
-            <td>longitude</td>
-            <td>{this.props.coords.longitude}</td>
-          </tr>
-        </tbody>
-      </table>
+      <Fragment>
+        <table>
+          <tbody>
+            <tr>
+              <td>latitude</td>
+              <td>{this.props.coords.latitude}</td>
+            </tr>
+            <tr>
+              <td>longitude</td>
+              <td>{this.props.coords.longitude}</td>
+            </tr>
+          </tbody>
+        </table>
+        <UserLocation lat={this.props.coords.latitude} long={this.props.coords.longitude} />
+      </Fragment>
     ) : (
-      <div>Getting the location data&hellip; </div>
+      <Fragment>
+        <div>Getting the location data&hellip; </div>
+      </Fragment>
     );
   }
 }
